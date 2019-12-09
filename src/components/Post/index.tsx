@@ -1,13 +1,11 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import unescape from 'unescape';
-
+import './style.scss';
 import Awards from '../Awards';
 import Flair from '../Flair';
 import Timestamp from '../Timestamp';
 import Votes from '../Votes';
-
-import './style.css';
 
 // const REDDIT_BASE_URL = 'https://reddit.com'
 const SELF_POST_THUMB_SRC = '/horizontal-lines.png'

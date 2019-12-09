@@ -1,6 +1,5 @@
 import React from 'react';
-
-import './style.css';
+import './style.scss';
 
 interface Props {
     size?: string;

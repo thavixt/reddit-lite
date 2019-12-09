@@ -1,15 +1,11 @@
 import React from 'react';
 import unescape from 'unescape';
-
 import Reddit from '../../api/reddit';
-
+import './style.scss';
 import Awards from '../Awards';
+import LoadingAnimation from '../LoadingAnimation';
 import Timestamp from '../Timestamp';
 import Votes from '../Votes';
-
-import LoadingAnimation from '../LoadingAnimation';
-
-import './style.css';
 
 interface Props {
     id: string;

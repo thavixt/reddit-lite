@@ -1,11 +1,9 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-
+import './style.scss';
 import LoadingAnimation from '../LoadingAnimation'
 import Reddit from '../../api/reddit'
 import Post from '../Post';
-
-import './style.css';
 
 export default function FeedList() {
     const [after, setAfter] = React.useState(null);

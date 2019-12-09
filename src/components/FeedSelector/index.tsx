@@ -1,7 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
-import './style.css';
+import './style.scss';
 
 const subreddits = [
     'all',

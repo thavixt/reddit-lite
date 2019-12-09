@@ -1,12 +1,12 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import unescape from 'unescape';
-import './style.css';
-import Timestamp from '../Timestamp';
+import './style.scss';
 import Awards from '../Awards';
 import CommentTree from '../CommentTree';
 import Flair from '../Flair';
 import Link from '../Link';
+import Timestamp from '../Timestamp';
 import Votes from '../Votes';
 
 const REDDIT_BASE_URL = 'https://reddit.com';
