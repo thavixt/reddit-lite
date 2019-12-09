@@ -1,0 +1,13 @@
+- upgrade to latest creat-react-app
+- typescript
+- sass
+- Page.jsx
+    - jump to top floating btn - top? bottom?
+- upvote and downvote
+    - login? auth?
+- fetch / add / store subreddit list?
+- handle urls?
+    - sub
+        - current sort & timeframe
+    - post
+        - consider crosspost

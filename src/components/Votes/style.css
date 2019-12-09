@@ -1,0 +1,20 @@
+.Votes {
+    display: inline;
+}
+.Votes.arrows {
+    display: inline-grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 2em 1fr;
+}
+
+.Votes.arrows span {
+    display: flex;
+    justify-content: center;
+    align-self: center;
+}
+.Votes.arrows span.upvote {
+    align-self: end;
+}
+.Votes.arrows span.downvote {
+    align-self: start;
+}

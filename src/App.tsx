@@ -1,26 +1,27 @@
 import React from 'react';
-import logo from './logo.svg';
+import { useSelector } from 'react-redux';
 import './App.css';
 
+import MainContainer from './containers/MainContainer'
+
 const App: React.FC = () => {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const post = useSelector((state: State) => state.post);
+	const subReddit = useSelector((state: State) => state.subReddit);
+
+	React.useEffect(() => {
+		if (post) {
+			document.title = post.title;
+		}
+		else if (subReddit) {
+			document.title = `r/${subReddit}`;
+		}
+	}, [post, subReddit]);
+
+	return (
+		<div className="App">
+			<MainContainer />
+		</div>
+	);
 }
 
 export default App;

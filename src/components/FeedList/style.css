@@ -1,0 +1,28 @@
+.FeedList {
+    background-color: var(--background-darker);
+    height: 100%;
+    padding-top: 3.5em;
+}
+.FeedList .list {
+    padding: 0 10px 10px 10px;
+    height: 100%;
+    overflow-y: auto;
+}
+.FeedList .list .more {
+    text-align: center;
+    cursor: pointer;
+}
+.FeedList .list::-webkit-scrollbar {
+    width: 7px;
+    /* display: none; */
+}
+.FeedList .list::-webkit-scrollbar-track {
+    background: none;
+}
+.FeedList .list::-webkit-scrollbar-thumb {
+    background: var(--color-dark);
+    border-radius: 10px;
+}
+.FeedList .list::-webkit-scrollbar-thumb:hover {
+    background: var(--color-darker);
+}

@@ -1,0 +1,23 @@
+.Awards {
+    display: inline-block;
+    margin: 0 0 0 5px;
+    border-radius: 7px;
+    padding: 2px 5px;
+    background: var(--color-darker);
+    color: var(--color-text);
+}
+
+.Awards .award .count {
+    font-size: 0.8em;
+    display: inline-block;
+}
+
+.Awards .award:not(:last-child) {
+    padding: 0 5px 0 0;
+}
+
+.Awards .award img {
+    padding: 0 0 0 2px;
+    display: inline-block;
+    height: 12px;
+}

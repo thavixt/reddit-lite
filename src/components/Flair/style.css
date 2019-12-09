@@ -1,0 +1,8 @@
+.Flair {
+    background-color: var(--color-darker);
+    border-radius: 7px;
+    color: var(--color-light);
+    font-weight: bold;
+    padding: 2px 5px;
+    margin: 0 4px;
+}
