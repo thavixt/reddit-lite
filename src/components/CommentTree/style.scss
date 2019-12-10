@@ -1,51 +1,44 @@
-.CommentTree {
-
-}
+@import 'variables.scss';
 
 .Comment {
     margin: 2em 0;
-}
 
-.Comment > .Comment {
-    padding-left: 1.5em;
-    border-left: 1px solid var(--color-darker);
-}
-.Comment > .Comment:hover {
-    border-left: 1px solid var(--color-dark);
-}
+    & > .Comment {
+        padding-left: 1.5em;
+        border-left: 1px solid $color-darker;
+        &:hover {
+            border-left: 1px solid $color-dark;
+        }
+    }
 
-.Comment > p {
-    margin-top: 1em;
-    margin-bottom: 0.3em;
-}
+    & > p {
+        margin-top: 1em;
+        margin-bottom: 0.3em;
+    }
 
-.Comment .author {
-    color: skyblue;
-    font-weight: 600;
-}
-.Comment .date {
+    .author {
+        color: skyblue;
+        font-weight: 600;
+    }
 
-}
-.Comment .body {
-    /* white-space: pre-line; */
-}
+    .stickied {
+        font-weight: bold;
+        color: greenyellow;
+    }
 
-.Comment .body blockquote {
-    background-color: var(--color-darkest);
-    border-left: 5px solid var(--color-dark);
-    padding: 0 0 0 1em;
-    margin: 0.5em 0;
-}
+    .header {
+        color: $color-medium;
+    }
 
-.Comment .body p:first-child {
-    margin-top: 0.3em;
-}
-
-.Comment .stickied {
-    font-weight: bold;
-    color: greenyellow;
-}
-
-.Comment .header {
-    color: var(--color-medium);
+    .body {
+        blockquote {
+            background-color: $color-darkest;
+            border-left: 5px solid $color-dark;
+            padding: 0 0 0 1em;
+            margin: 0.5em 0;
+        }
+        p:first-child {
+            margin-top: 0.3em;
+        }
+    }
 }

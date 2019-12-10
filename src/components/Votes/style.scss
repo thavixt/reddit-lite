@@ -1,20 +1,24 @@
 .Votes {
     display: inline;
-}
-.Votes.arrows {
-    display: inline-grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 2em 1fr;
-}
 
-.Votes.arrows span {
-    display: flex;
-    justify-content: center;
-    align-self: center;
-}
-.Votes.arrows span.upvote {
-    align-self: end;
-}
-.Votes.arrows span.downvote {
-    align-self: start;
+    &.arrows {
+        display: inline-grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 2em 1fr;
+
+        span {
+            display: flex;
+            justify-content: center;
+            align-self: center;
+        }
+    }
+
+    &.arrows 
+    &.arrows span.upvote {
+        align-self: end;
+    }
+
+    &.arrows span.downvote {
+        align-self: start;
+    }
 }

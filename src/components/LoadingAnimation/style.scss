@@ -1,3 +1,5 @@
+@import 'variables.scss';
+
 .lds-dual-ring {
   display: inline-block;
   width: 46px;
@@ -10,8 +12,8 @@
   height: 46px;
   margin: 1px;
   border-radius: 50%;
-  border: 5px solid var(--color-darker);
-  border-color: var(--color-darker) transparent var(--color-darker) transparent;
+  border: 5px solid $color-darker;
+  border-color: $color-darker transparent $color-darker transparent;
   animation: lds-dual-ring 1.2s linear infinite;
 }
 @keyframes lds-dual-ring {
@@ -30,7 +32,8 @@
     align-items: center;     /* center items horizontally, in this case */
     width: 100%;
     height: 100%;
-}
-.LoadingAnimation.small {
-  height: initial;
+    
+    &.small {
+      height: initial;
+    }
 }

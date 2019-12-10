@@ -1,70 +1,74 @@
+@import 'variables.scss';
+
 .Page {
     padding: 1em;
     height: 100vh;
     overflow: auto;
-}
-.Page.crossPost {
-    border: 1px solid var(--color-dark);
-    border-radius: 7px;
-    height: initial;
-    margin-top: 1em;
-}
 
-.Page h1 {
-    margin-bottom: 0;
-}
+    &.crossPost {
+        border: 1px solid $color-dark;
+        border-radius: 7px;
+        height: initial;
+        margin-top: 1em;
+    }
 
-.Page .content {
-    margin-top: 1em;
-}
+    h1 {
+        margin-bottom: 0;
+    }
 
-.Page .content img,
-.Page .content video {
-    display: block;
-    max-width: 100%;
-    height: auto;
-    margin: 0 auto;
-}
+    .title {
+        margin-top: 0.5em;
 
-.Page .content .embed > * {
-    display: block;
-    margin: 0 auto;
-}
+        & > * {
+            display: inline;
+        }
+    }
 
-.Page .title >* {
-    display: inline;
-}
-.Page .title {
-    margin-top: 0.5em;
-}
+    .author,
+    .date,
+    .sub {
+        color: $color-medium;
+    }
 
-.Page .comments {
-    margin-top: 3em;
-    padding-top: 2em;
-    border-top: 1px solid var(--color-dark);
-}
+    .comments {
+        margin-top: 3em;
+        padding-top: 2em;
+        border-top: 1px solid $color-dark;
+    }
 
-.Page .url,
-.Page .redditLink {
-    padding: 0.5em 0;
-}
+    .url,
+    .redditLink {
+        padding: 0.5em 0;
+    }
 
-.Page .author,
-.Page .date,
-.Page .sub {
-    color: var(--color-medium);
-}
+    .content {
+        margin-top: 1em;
+        
+        img,
+        video {
+            display: block;
+            max-width: 100%;
+            height: auto;
+            margin: 0 auto;
+        }
 
-.Page::-webkit-scrollbar {
-    width: 7px;
-}
-.Page::-webkit-scrollbar-track {
-    background: none;
-}
-.Page::-webkit-scrollbar-thumb {
-    background: var(--color-dark);
-    border-radius: 10px;
-}
-.Page::-webkit-scrollbar-thumb:hover {
-    background: var(--color-darker);
+        .embed > * {
+            display: block;
+            margin: 0 auto;
+        }
+    }
+
+    &::-webkit-scrollbar {
+        width: 7px;
+    }
+    &::-webkit-scrollbar-track {
+        background: none;
+    }
+    &::-webkit-scrollbar-thumb {
+        background: $color-dark;
+        border-radius: 10px;
+    }
+    &::-webkit-scrollbar-thumb:hover {
+        background: $color-darker;
+    }
 }

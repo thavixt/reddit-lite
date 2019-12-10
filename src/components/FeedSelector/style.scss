@@ -1,37 +1,50 @@
+@import 'variables.scss';
+
 .FeedSelector {
-    background-color: var(--background);
+    background-color: $background;
     position: absolute;
     width: 100%;
-}
-.FeedSelector .selectors {
-    display: grid;
-    grid-template-rows: 1fr;
-    grid-template-columns: 1fr 1fr 1fr;
-}
-.FeedSelector .selectors p {
-    text-align: center;
-}
-.FeedSelector .selectors div.open,
-.FeedSelector .selectors div:hover {
-    background-color: var(--color-darker);
-}
-.FeedSelector .list ul {
-    margin: 0;
-    border-top: 2px solid var(--color-darker);
-    border-bottom: 2px solid var(--color-darker);
-    padding: 10px 1em;
-}
-.FeedSelector .list ul li {
-    cursor: pointer;
-    padding: 3px 10px;
-    list-style-type: none;
-}
-.FeedSelector .list ul li span {
-    padding: 3px 10px;
-    border-radius: 7px;
-}
-.FeedSelector .list li span.selected,
-.FeedSelector .list li:hover span {
-    font-weight: 600;
-    background-color: var(--color-darker);
+
+    .selectors {
+        display: grid;
+        grid-template-rows: 1fr;
+        grid-template-columns: 1fr 1fr 1fr;
+
+        p {
+            text-align: center;
+        }
+
+        div.open,
+        div:hover {
+            background-color: $color-darker;
+        }
+    }
+
+    .list {
+        ul {
+            margin: 0;
+            border-top: 2px solid $color-darker;
+            border-bottom: 2px solid $color-darker;
+            padding: 10px 1em;
+            padding: 3px 10px;
+            border-radius: 7px;
+
+            li {
+                cursor: pointer;
+                padding: 3px 10px;
+                list-style-type: none;
+                
+                span {
+                    padding: 3px 10px;
+                    border-radius: 7px;
+                }
+            }
+        }
+        
+        li span.selected,
+        li:hover span {
+            font-weight: 600;
+            background-color: $color-darker;
+        }
+    }
 }
