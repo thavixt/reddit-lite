@@ -49,8 +49,8 @@ export default function FeedList() {
         </p>;
 
     return (
-        <div className='FeedList' ref={ref}>
-            <div className="list">
+        <div className='FeedList'>
+            <div className="list" ref={ref}>
                 {feed.length ? feed : <LoadingAnimation />}
                 {loadingMore ? <LoadingAnimation size="small" /> : more}
             </div>

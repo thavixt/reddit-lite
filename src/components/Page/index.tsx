@@ -84,7 +84,7 @@ export default function Page(props: Props) {
                         </span>
                     </span>&nbsp;
                     <span className="author">
-                        {crossPostLevel > 0 ? 'posted' : 'crossposted'} by u/{post.author}
+                        {post.crosspost_parent_list ? 'crossposted' : 'posted'} by u/{post.author}
                     </span>&nbsp;
                     <Timestamp className="date" timestamp={post.created_utc} />&nbsp;
                     {crossPostLevel > 0
