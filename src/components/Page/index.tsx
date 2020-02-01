@@ -6,6 +6,7 @@ import Awards from '../Awards';
 import CommentTree from '../CommentTree';
 import Flair from '../Flair';
 import Link from '../Link';
+import LoadingAnimation from '../LoadingAnimation';
 import Timestamp from '../Timestamp';
 import Votes from '../Votes';
 
@@ -18,9 +19,9 @@ interface Props {
 
 export default function Page(props: Props) {
     const dispatch = useDispatch();
-    let post = useSelector((state: State) => state.post)!;
+    let post = useSelector((state: State) => state.post);
+    let subReddit = useSelector((state: State) => state.subReddit);
     const { crossPostLevel = 0 } = props;
-    // console.log(post);
 
     const ref = React.useRef<HTMLDivElement>(null);
     React.useEffect(() => {
@@ -31,6 +32,17 @@ export default function Page(props: Props) {
 
     if (!post) {
         return null;
+    }
+
+    if (typeof post === 'string') {
+        dispatch({
+            type: 'LOAD_POST',
+            payload: {
+                subReddit,
+                post,
+            },
+        });
+        return <LoadingAnimation />;
     }
 
     let level = 0;

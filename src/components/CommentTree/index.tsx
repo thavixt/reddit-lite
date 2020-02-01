@@ -1,11 +1,13 @@
 import React from 'react';
 import unescape from 'unescape';
-import Reddit from '../../api/reddit';
+import Reddit from '../../api';
 import './style.scss';
 import Awards from '../Awards';
 import LoadingAnimation from '../LoadingAnimation';
 import Timestamp from '../Timestamp';
 import Votes from '../Votes';
+
+import { openLinksInNewTab } from '../../utils'
 
 interface Props {
     id: string;
@@ -13,12 +15,9 @@ interface Props {
 }
 
 export default function CommentTree(props: Props) {
-    // console.log(props);
-
     const { id, sub } = props;
     const [isLoading, setLoading] = React.useState(false);
     const [comments, setComments] = React.useState<Reddit.Comment['data'] | null>(null);
-    // console.log(comments);
 
     React.useEffect(() => {
         setLoading(true);
@@ -28,6 +27,7 @@ export default function CommentTree(props: Props) {
                 setComments(comments[1].data);
             }
             setLoading(false);
+            openLinksInNewTab();
         })()
     }, [sub, id]);
 
@@ -74,6 +74,7 @@ function ShowMore(props: Reddit.Comment) {
 
 function CommentBranch(props: Reddit.Comment) {
     const { data } = props;
+
     if (data.count) {
         return <ShowMore data={data} />
     }
@@ -84,22 +85,26 @@ function CommentBranch(props: Reddit.Comment) {
 
     return (
         <div className="Comment">
-            <div className="header">
-                <span className="author">{data.author}</span> &nbsp;
-                {data.score_hidden ?
-                    'score hidden'
-                    : (<Votes className="score" score={data.score}> points</Votes>)
-                } -&nbsp;
+            <div className="body">
+                <div className="header">
+                    <span className={`author${data.is_submitter ? ' op' : ''}`}>
+                        {data.author}
+                    </span>
+                    {data.score_hidden ?
+                        'score hidden'
+                        : (<Votes className="score" score={data.score}> points</Votes>)
+                    } -&nbsp;
                 <Timestamp className="date" timestamp={data.created_utc} />&nbsp;
                 <Awards className="awards" awards={data.all_awardings || []} />
-                {data.stickied && <span>
-                    - <span className="stickied">sticked comment</span>
-                </span>}
+                    {data.stickied && <span>
+                        - <span className="stickied">sticked comment</span>
+                    </span>}
+                </div>
+                <div
+                    className="text"
+                    dangerouslySetInnerHTML={{ __html: unescape(data.body_html) }}
+                />
             </div>
-            <div
-                className="body"
-                dangerouslySetInnerHTML={{ __html: unescape(data.body_html) }}
-            />
             {replies}
         </div>
     );

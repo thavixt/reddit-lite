@@ -24,7 +24,7 @@
         }
         &::-webkit-scrollbar-thumb {
             background: $color-dark;
-            border-radius: 10px;
+            border-radius: $border-radius;
         }
         &::-webkit-scrollbar-thumb:hover {
             background: $color-darker;

@@ -1,0 +1,46 @@
+export function openLinksInNewTab() {
+    for (let i = 0; i < document.links.length; i++) {
+        document.links[i].target = '_blank';
+    }
+}
+
+export function setQueryParam(key: string, value: string) {
+    const params = new URLSearchParams(window.location.search);
+
+    if (value) {
+        params.set(key, value);
+    } else {
+        params.delete(key);
+    }
+
+    const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?' + params.toString();
+    window.history.pushState({ path: newUrl }, '', newUrl);
+}
+
+export function getQueryParam<T = string>(key: string) {
+    const params = new URLSearchParams(window.location.search);
+
+    return params.get(key) as T | null;
+}
+
+function saveSubReddits(subs: string[]) {
+    const uniqueSorted = Array.from(new Set(subs.sort()));
+    localStorage.setItem('savedSubReddits', JSON.stringify(uniqueSorted));
+}
+
+export function saveSubReddit(sub: string) {
+    const saved = getSavedSubs();
+    saved.push(sub);
+    saveSubReddits(saved);
+}
+
+export function getSavedSubs(): string[] {
+    const stored = localStorage.getItem('savedSubReddits');
+    return stored ? JSON.parse(stored) : [];
+}
+
+export function deleteSavedSubReddit(sub: string) {
+    const saved = getSavedSubs();
+    const filtered = saved.filter(el => el !== sub);
+    saveSubReddits(filtered);
+}

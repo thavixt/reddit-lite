@@ -2,10 +2,8 @@
 
 .Awards {
     display: inline-block;
-    margin: 0 0 0 5px;
-    border-radius: 7px;
-    padding: 2px 5px;
-    background: $color-darker;
+    border-radius: $border-radius;
+    padding: 2px;
     color: $color-text;
     
     .award {

@@ -11,34 +11,43 @@
         }
     }
 
-    & > p {
-        margin-top: 1em;
-        margin-bottom: 0.3em;
-    }
-
-    .author {
-        color: skyblue;
-        font-weight: 600;
-    }
-
-    .stickied {
-        font-weight: bold;
-        color: greenyellow;
-    }
-
-    .header {
-        color: $color-medium;
-    }
-
     .body {
-        blockquote {
-            background-color: $color-darkest;
-            border-left: 5px solid $color-dark;
-            padding: 0 0 0 1em;
-            margin: 0.5em 0;
+        & > p {
+            margin-top: 1em;
+            margin-bottom: 0.3em;
         }
-        p:first-child {
-            margin-top: 0.3em;
+
+        .author {
+            color: $color-text;
+            font-weight: 600;
+            margin-right: 0.5em;
+
+            &.op {
+                padding: 0 5px;
+                border-radius: $border-radius;
+                background-color: rgba(178, 34, 34, 0.5);
+            }
+        }
+
+        .stickied {
+            font-weight: bold;
+            color: greenyellow;
+        }
+
+        .header {
+            color: $color-medium;
+        }
+
+        .text {
+            blockquote {
+                background-color: $color-darkest;
+                border-left: 5px solid $color-dark;
+                padding: 0 0 0 1em;
+                margin: 0.5em 0;
+            }
+            p:first-child {
+                margin-top: 0.3em;
+            }
         }
     }
 }

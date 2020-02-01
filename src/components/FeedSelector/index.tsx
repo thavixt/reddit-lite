@@ -2,15 +2,8 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './style.scss';
 
-const subreddits = [
-    'all',
-    'pathofexile',
-    'rule34',
-    'Rule34Overwatch',
-    'AzerothPorn',
-    'rule34gifs',
-    'Overwatch_Porn'
-];
+import { deleteSavedSubReddit, getSavedSubs, saveSubReddit } from '../../utils';
+
 const sortTypes: { [key: string]: string } = {
     hot: 'Hot',
     'new': 'New',
@@ -28,13 +21,17 @@ const timeFrameTypes: { [key: string]: string } = {
 };
 
 export default function FeedSelector() {
-    const subReddit = useSelector((state: State) => state.subReddit);
+    const dispatch = useDispatch();
+    const currentSubReddit = useSelector((state: State) => state.subReddit);
     const sort = useSelector((state: State) => state.sort);
     const timeFrame = useSelector((state: State) => state.timeFrame);
     const [isSubsOpen, setSubsOpen] = React.useState(false);
     const [isSortOpen, setSortOpen] = React.useState(false);
     const [isTimeOpen, setTimeOpen] = React.useState(false);
-    const dispatch = useDispatch();
+    const [updateCounter, update] = React.useState(0);
+
+    const forceUpdate = () => update(updateCounter + 1);
+    const subreddits = getSavedSubs();
 
     const subs = subreddits.map(sub => <li
         key={sub}
@@ -44,7 +41,7 @@ export default function FeedSelector() {
             setSubsOpen(false);
         }}
     >
-        <span className={subReddit === sub ? 'selected' : ''}>r/{sub}</span>
+        <span className={currentSubReddit === sub ? 'selected' : ''}>r/{sub}</span>
     </li>);
 
     const sorts = Object.keys(sortTypes).map(key => <li
@@ -70,6 +67,7 @@ export default function FeedSelector() {
     </li>)
 
     const showTimeFrames = ['top', 'controversial'].includes(sort);
+    const isSavedSubReddit = subreddits.includes(currentSubReddit);
 
     return (
         <div
@@ -88,7 +86,33 @@ export default function FeedSelector() {
                         setSortOpen(false);
                         setTimeOpen(false);
                     }}>
-                    <p>r/{subReddit}</p>
+                    <p>
+                        <button
+                            onClick={() => {
+                                isSavedSubReddit
+                                    ? deleteSavedSubReddit(currentSubReddit)
+                                    : saveSubReddit(currentSubReddit);
+                                forceUpdate();
+                            }}
+                        >
+                            {isSavedSubReddit ? '-' : '+'}
+                        </button>
+                        r/
+                        <input
+                            type="text"
+                            name="subReddit"
+                            id="subRedditInput"
+                            defaultValue={currentSubReddit}
+                            onBlur={(event) => {
+                                dispatch({ type: 'SET_SUBREDDIT', payload: event.currentTarget.value });
+                            }}
+                            onKeyDown={(event) => {
+                                if (event.keyCode == 13) {
+                                    dispatch({ type: 'SET_SUBREDDIT', payload: event.currentTarget.value })
+                                }
+                            }}
+                        />
+                    </p>
                 </div>
                 <div
                     className={isSortOpen ? 'open' : ''}
@@ -109,21 +133,21 @@ export default function FeedSelector() {
                     <p>{timeFrame}</p>
                 </div>}
             </div>
-            {isSubsOpen ? <div className='list' onMouseLeave={() => {
+            {isSubsOpen ? <div className='list subs' onMouseLeave={() => {
                 setSubsOpen(false);
             }}>
                 <ul>
-                    {subs}
+                    {subs.length ? subs : 'You have no saved subreddits.'}
                 </ul>
             </div> : null}
-            {isSortOpen ? <div className='list' onMouseLeave={() => {
+            {isSortOpen ? <div className='list sort' onMouseLeave={() => {
                 setSortOpen(false);
             }}>
                 <ul>
                     {sorts}
                 </ul>
             </div> : null}
-            {isTimeOpen ? <div className='list' onMouseLeave={() => {
+            {isTimeOpen ? <div className='list time' onMouseLeave={() => {
                 setTimeOpen(false);
             }}>
                 <ul>

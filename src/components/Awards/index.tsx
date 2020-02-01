@@ -11,10 +11,13 @@ export default function Awards(props: Props) {
         return null;
     }
 
-    const awards = props.awards.map((el, i) =>
-        <span key={i} className="award">
-            <img src={el.resized_icons[0].url} alt={el.name} />
-            <span className="count">{el.count}</span>
+    const awards = props.awards.map((award, i) =>
+        <span key={i} className="award" title={award.name}>
+            <img src={award.icon_url} alt={award.name} />
+            {award.count > 1
+                ? <span className="count">{award.count}</span>
+                : null
+            }
         </span>);
 
     return (

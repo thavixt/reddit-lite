@@ -8,19 +8,18 @@ import Timestamp from '../Timestamp';
 import Votes from '../Votes';
 
 // const REDDIT_BASE_URL = 'https://reddit.com'
-const SELF_POST_THUMB_SRC = '/horizontal-lines.png'
+const SELF_POST_THUMB_SRC = `${process.env.PUBLIC_URL}/horizontal-lines.png`;
 
 interface Props {
-    post: Reddit.Post['data'];
+    post: Reddit.Post;
 }
 
 export default function Post(props: Props) {
     const { post } = props;
+
     const dispatch = useDispatch();
     const currentPostId = useSelector((state: State) => state.post && state.post.id);
 
-    // const author_url = `${REDDIT_BASE_URL}user/${post.author}`;
-    // const post_url = `${REDDIT_BASE_URL}${post.permalink}`;
     const hasThumbnail = post.thumbnail && post.thumbnail !== 'self';
     const thumb_url = hasThumbnail ? post.thumbnail : SELF_POST_THUMB_SRC;
     const flairs = post.link_flair_richtext.map((e, i) => <Flair key={i} {...e} />);
@@ -35,8 +34,8 @@ export default function Post(props: Props) {
                     <img className={hasThumbnail ? '' : 'default'} src={thumb_url} alt="thumb" />
                 </a>
             </div>
-            <div>
-                <small className='author'>u/{post.author}</small>
+            <div className="details">
+                <small className='author'>u/{post.subreddit}</small>
                 -
                 <small className='date'>
                     <Timestamp timestamp={post.created_utc} />

@@ -10,13 +10,31 @@
         grid-template-rows: 1fr;
         grid-template-columns: 1fr 1fr 1fr;
 
-        p {
+        p, div {
             text-align: center;
+        }
+
+        #subRedditInput {
+            display: inline-flex;
+            padding: 3px;
+            width: calc(100% - 3em);
+            background: transparent;
+            border: 1px solid $color-darker;
+            border-radius: $border-radius-small;
+            color: $color-text;
+
+            &:focus {
+                outline: none;
+            }
         }
 
         div.open,
         div:hover {
             background-color: $color-darker;
+
+            #subRedditInput {
+                border: 1px solid $color-dark;
+            }
         }
     }
 
@@ -27,7 +45,7 @@
             border-bottom: 2px solid $color-darker;
             padding: 10px 1em;
             padding: 3px 10px;
-            border-radius: 7px;
+            border-radius: $border-radius-small;
 
             li {
                 cursor: pointer;
@@ -36,7 +54,7 @@
                 
                 span {
                     padding: 3px 10px;
-                    border-radius: 7px;
+                    border-radius: $border-radius-small;
                 }
             }
         }
@@ -45,6 +63,29 @@
         li:hover span {
             font-weight: 600;
             background-color: $color-darker;
+        }
+        
+        &.subs {
+            text-align: left;
+        }
+        &.sort {
+            text-align: center;
+        }
+        &.time {
+            text-align: right;
+        }
+    }
+
+    button {
+        background: none;
+        padding: 2px;
+        margin: 0 5px;
+        border: 1px solid $color-dark;
+        color: $color-text;
+        cursor: pointer;
+
+        &:focus {
+            outline: none;
         }
     }
 }

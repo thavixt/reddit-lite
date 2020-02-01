@@ -1,8 +1,8 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import './style.scss';
-import LoadingAnimation from '../LoadingAnimation'
-import Reddit from '../../api/reddit'
+import LoadingAnimation from '../LoadingAnimation';
+import Reddit from '../../api';
 import Post from '../Post';
 
 export default function FeedList() {
@@ -23,7 +23,7 @@ export default function FeedList() {
             const afterRef = loadingMore ? after : null;
 
             const fetchedFeed = await Reddit.feed(subReddit, sort, timeFrame, afterRef);
-            const posts: Reddit.Post[] = fetchedFeed.data.children.map((post: Reddit.Post) =>
+            const posts = fetchedFeed.data.children.map((post: { data: Reddit.Post }) =>
                 <Post post={post.data} key={post.data.id} />
             );
 

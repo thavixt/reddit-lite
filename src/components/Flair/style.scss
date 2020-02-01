@@ -2,8 +2,8 @@
 
 .Flair {
     background-color: $color-darker;
-    border-radius: 7px;
-    color: $color-light;
+    border-radius: $border-radius-small;
+    color: $color-text;
     font-weight: bold;
     padding: 2px 5px;
     margin: 0 4px;
