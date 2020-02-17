@@ -33,7 +33,7 @@ code {
 }
 
 a, .link {
-    color: skyblue;
+    color: $color-link;
     cursor: pointer;
     text-decoration: underline;
     /* font-weight: bold; */

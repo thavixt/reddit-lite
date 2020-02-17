@@ -14,7 +14,7 @@ export function setQueryParam(key: string, value: string) {
     }
 
     const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?' + params.toString();
-    window.history.pushState({ path: newUrl }, '', newUrl);
+    window.history.pushState(null, '', newUrl);
 }
 
 export function getQueryParam<T = string>(key: string) {

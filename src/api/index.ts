@@ -19,6 +19,8 @@
 //     refreshToken: REFRESH_TOKEN
 // });
 
+const postCache = new Map<string, any>();
+
 export default {
     feed(subreddit: string, sort: Sort, time: TimeFrame, after?: string | null): Promise<API.FeedResponse> {
         const q = time ? `t=${time}` : '';
@@ -37,11 +39,17 @@ export default {
     },
 
     post(subreddit: string, postId: string): Promise<API.CommentsResponse> {
+        if (postCache.has(postId)) {
+            return postCache.get(postId);
+        }
         return new Promise((resolve, reject) => {
             fetch(`https://www.reddit.com/r/${subreddit}/comments/${postId}.json`)
                 .then(response => response.text())
                 .then(JSON.parse)
-                .then(resolve)
+                .then(post => {
+                    postCache.set(postId, post);
+                    resolve(post);
+                })
                 .catch(() =>
                     reject(`Could not fetch comments for reddit.com/r/${subreddit}/comments/${postId}.json`)
                 );

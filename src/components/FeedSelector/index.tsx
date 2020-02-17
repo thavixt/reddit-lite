@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './style.scss';
 
@@ -21,6 +21,7 @@ const timeFrameTypes: { [key: string]: string } = {
 };
 
 export default function FeedSelector() {
+    const inputRef = useRef<HTMLInputElement>(null);
     const dispatch = useDispatch();
     const currentSubReddit = useSelector((state: State) => state.subReddit);
     const sort = useSelector((state: State) => state.sort);
@@ -29,6 +30,12 @@ export default function FeedSelector() {
     const [isSortOpen, setSortOpen] = React.useState(false);
     const [isTimeOpen, setTimeOpen] = React.useState(false);
     const [updateCounter, update] = React.useState(0);
+
+    useEffect(() => {
+        if (inputRef.current) {
+            inputRef.current.value = currentSubReddit;
+        }
+    }, [currentSubReddit])
 
     const forceUpdate = () => update(updateCounter + 1);
     const subreddits = getSavedSubs();
@@ -68,6 +75,12 @@ export default function FeedSelector() {
 
     const showTimeFrames = ['top', 'controversial'].includes(sort);
     const isSavedSubReddit = subreddits.includes(currentSubReddit);
+    const toggleSaveSubreddit = () => {
+        isSavedSubReddit
+            ? deleteSavedSubReddit(currentSubReddit)
+            : saveSubReddit(currentSubReddit);
+        forceUpdate();
+    }
 
     return (
         <div
@@ -88,17 +101,14 @@ export default function FeedSelector() {
                     }}>
                     <p>
                         <button
-                            onClick={() => {
-                                isSavedSubReddit
-                                    ? deleteSavedSubReddit(currentSubReddit)
-                                    : saveSubReddit(currentSubReddit);
-                                forceUpdate();
-                            }}
+                            onClick={toggleSaveSubreddit}
+                            title={(isSavedSubReddit ? 'Remove from' : 'Add to') + ' favourites'}
                         >
                             {isSavedSubReddit ? '-' : '+'}
                         </button>
                         r/
                         <input
+                            ref={inputRef}
                             type="text"
                             name="subReddit"
                             id="subRedditInput"

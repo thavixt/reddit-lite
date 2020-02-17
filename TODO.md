@@ -1,6 +1,8 @@
 ## TODOs
 
 - [ ] not all post title flairs visible atm ?
+- [ ] HTML entities in window title
+- [ ] embedded content not changing sometimes on post/page change
 - [ ] Page
     - [ ] jump to top btn
 - [ ] FeedList
@@ -9,6 +11,7 @@
 
 ## Ideas
 
+- [ ] keyboard navigation
 - [ ] upvote and downvote -> use [snoowrap](https://github.com/not-an-aardvark/snoowrap)
     - [ ] login? auth?
 - [ ] fetch / add / store subreddit list?

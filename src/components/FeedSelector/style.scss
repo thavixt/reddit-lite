@@ -40,11 +40,10 @@
 
     .list {
         ul {
-            margin: 0;
+            margin: 2px 5px;
+            padding: 1px 5px;
             border-top: 2px solid $color-darker;
             border-bottom: 2px solid $color-darker;
-            padding: 10px 1em;
-            padding: 3px 10px;
             border-radius: $border-radius-small;
 
             li {
@@ -59,8 +58,12 @@
             }
         }
         
-        li span.selected,
         li:hover span {
+            font-weight: 600;
+            background-color: $color-darkest;
+        }
+        
+        li span.selected {
             font-weight: 600;
             background-color: $color-darker;
         }
@@ -78,11 +81,17 @@
 
     button {
         background: none;
-        padding: 2px;
+        padding: 2px 5px;
         margin: 0 5px;
-        border: 1px solid $color-dark;
+        // border: 1px solid $color-dark;
+        border: none;
+        border-radius: $border-radius;
         color: $color-text;
         cursor: pointer;
+
+        &:hover {
+            background: $color-dark;
+        }
 
         &:focus {
             outline: none;

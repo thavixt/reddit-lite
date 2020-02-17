@@ -28,7 +28,7 @@ export default function Page(props: Props) {
         if (ref && ref.current) {
             ref.current.scrollTo(0, 0)
         }
-    });
+    }, [post]);
 
     if (!post) {
         return null;
@@ -69,11 +69,11 @@ export default function Page(props: Props) {
                     type="video/webm"
                 />
             </video>}
-            {!embed && !video && post.url && <Link className="url" />}
             <div
                 className="html"
                 dangerouslySetInnerHTML={{ __html: unescape(post.selftext_html) }}
             />
+            {!embed && !video && post.url && <Link className="url" />}
         </div>;
 
     const flairs = post.link_flair_richtext.map((e: Reddit.Flair, i: number) =>
