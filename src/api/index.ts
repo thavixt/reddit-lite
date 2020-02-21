@@ -7,16 +7,11 @@
 // handle voting and commenting?
 // saving, subscriptions and custom multis, etc ...
 
-// const ID = 'oFZ3D0r5AsLYPQ';
-// const SECRET = '74aTZKOW2qjn37pgtQfk8J1M2kA';
-// const ACCESS_TOKEN = '37586904--hE4DSG04zktuXUmuI5YHvwvQRY';
-// const REFRESH_TOKEN = '37586904-p1OMMks2UjXOL_-D3zmPkhc6Odg';
-
 // const r = new snoowrap({
 //     userAgent: 'Reddit-Lite-v0.1',
-//     clientId: ID,
-//     clientSecret: SECRET,
-//     refreshToken: REFRESH_TOKEN
+//     clientId: process.env.REACT_APP_TWITCH_APP_ID,
+//     clientSecret: process.env.REACT_APP_TWITCH_APP_SECRET,
+//     refreshToken: process.env.REACT_APP_TWITCH_APP_REFRESH_TOKEN
 // });
 
 const postCache = new Map<string, any>();

@@ -27,6 +27,7 @@
 
 ## Done
 
+- [x] dotenv
 - [x] upgrade to latest creat-react-app
 - [x] typescript
     - [x] global types `types/index.d.ts`
