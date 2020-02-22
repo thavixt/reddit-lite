@@ -23,9 +23,7 @@ export default function FeedList() {
             const afterRef = loadingMore ? after : null;
 
             const fetchedFeed = await Reddit.feed(subReddit, sort, timeFrame, afterRef);
-            const posts = fetchedFeed.data.children.map((post: { data: Reddit.Post }) =>
-                <Post post={post.data} key={post.data.id} />
-            );
+            const posts = fetchedFeed.data.children.map((post: { data: Reddit.Post }) => post.data);
 
             if (loadingMore) {
                 setFeed([...feed, ...posts]);
@@ -37,8 +35,11 @@ export default function FeedList() {
 
             setAfter(fetchedFeed.data.after);
         })();
-        // TODO: compile warning: missing dependencies?
+        // eslint-disable-next-line
     }, [subReddit, sort, timeFrame, loadedMoreCount]);
+
+    const feedList = feed.map((post: Reddit.Post) =>
+        <Post post={post} key={post.id} />);
 
     const more =
         <p className="more" onClick={() => {
@@ -51,7 +52,7 @@ export default function FeedList() {
     return (
         <div className='FeedList'>
             <div className="list" ref={ref}>
-                {feed.length ? feed : <LoadingAnimation />}
+                {feedList.length ? feedList : <LoadingAnimation />}
                 {loadingMore ? <LoadingAnimation size="small" /> : more}
             </div>
         </div>

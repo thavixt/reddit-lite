@@ -7,6 +7,6 @@ interface Props {
 
 export default function Embeddable(props: Props) {
     return (
-        <iframe className="Embeddable" src={props.url} />
+        <iframe title="Embeddable" className="Embeddable" src={props.url} />
     )
 }

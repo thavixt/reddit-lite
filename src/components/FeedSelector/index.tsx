@@ -117,7 +117,7 @@ export default function FeedSelector() {
                                 dispatch({ type: 'SET_SUBREDDIT', payload: event.currentTarget.value });
                             }}
                             onKeyDown={(event) => {
-                                if (event.keyCode == 13) {
+                                if (event.keyCode === 13) {
                                     dispatch({ type: 'SET_SUBREDDIT', payload: event.currentTarget.value })
                                 }
                             }}
