@@ -1,6 +1,6 @@
-export function openLinksInNewTab() {
+export async function setLinkTargets(target: string) {
     for (let i = 0; i < document.links.length; i++) {
-        document.links[i].target = '_blank';
+        document.links[i].target = target;
     }
 }
 

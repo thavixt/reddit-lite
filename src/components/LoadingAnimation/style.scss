@@ -1,39 +1,54 @@
 @import 'variables.scss';
 
 .lds-dual-ring {
-  display: inline-block;
-  width: 46px;
-  height: 46px;
+	display: inline-block;
+	width: 46px;
+	height: 46px;
 }
 .lds-dual-ring:after {
-  content: " ";
-  display: block;
-  width: 46px;
-  height: 46px;
-  margin: 1px;
-  border-radius: 50%;
-  border: 5px solid $color-darker;
-  border-color: $color-darker transparent $color-darker transparent;
-  animation: lds-dual-ring 1.2s linear infinite;
+	content: " ";
+	display: block;
+	width: 46px;
+	height: 46px;
+	margin: 1px;
+	border-radius: 50%;
+	border: 5px solid $color-darker;
+	border-color: $color-darker transparent $color-darker transparent;
+	animation: lds-dual-ring 1.2s linear infinite;
 }
 @keyframes lds-dual-ring {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
 }
 
 .LoadingAnimation {
-    display: flex;           /* establish flex container */
-    flex-direction: column;  /* make main axis vertical */
-    justify-content: center; /* center items vertically, in this case */
-    align-items: center;     /* center items horizontally, in this case */
-    width: 100%;
-    height: 100%;
-    
-    &.small {
-      height: initial;
-    }
+	$small: 24px;
+	$small-duration: 0.8s;
+
+	margin: 5px 0;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 100%;
+
+	&.small {
+		justify-content: center;
+		align-items: center;
+
+		.lds-dual-ring {
+			width: $small;
+			height: $small;
+		}
+		.lds-dual-ring:after {
+			width: $small;
+			height: $small;
+			animation-duration: $small-duration;
+		}
+	}
 }

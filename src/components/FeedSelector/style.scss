@@ -8,10 +8,11 @@
     .selectors {
         display: grid;
         grid-template-rows: 1fr;
-        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-columns: 2fr 1fr 1fr;
 
         p, div {
             text-align: center;
+            padding: 3px;
         }
 
         #subRedditInput {
@@ -20,7 +21,7 @@
             width: calc(100% - 3em);
             background: transparent;
             border: 1px solid $color-darker;
-            border-radius: $border-radius-small;
+            border-radius: $border-radius-tiny;
             color: $color-text;
 
             &:focus {
@@ -30,7 +31,7 @@
 
         div.open,
         div:hover {
-            background-color: $color-darker;
+            background-color: $color-darkest;
 
             #subRedditInput {
                 border: 1px solid $color-dark;
@@ -39,12 +40,12 @@
     }
 
     .list {
+        background-color: $color-darkest;
         ul {
-            margin: 2px 5px;
-            padding: 1px 5px;
+            margin: 0;
+            padding: 5px 5px;
             border-top: 2px solid $color-darker;
             border-bottom: 2px solid $color-darker;
-            border-radius: $border-radius-small;
 
             li {
                 cursor: pointer;
@@ -52,15 +53,14 @@
                 list-style-type: none;
                 
                 span {
-                    padding: 3px 10px;
-                    border-radius: $border-radius-small;
+                    padding: 3px 5px;
+                    border-radius: $border-radius-tiny;
                 }
             }
         }
         
         li:hover span {
-            font-weight: 600;
-            background-color: $color-darkest;
+            background-color: $color-darker;
         }
         
         li span.selected {
@@ -72,7 +72,7 @@
             text-align: left;
         }
         &.sort {
-            text-align: center;
+            text-align: right;
         }
         &.time {
             text-align: right;
@@ -85,7 +85,7 @@
         margin: 0 5px;
         // border: 1px solid $color-dark;
         border: none;
-        border-radius: $border-radius;
+        border-radius: $border-radius-tiny;
         color: $color-text;
         cursor: pointer;
 

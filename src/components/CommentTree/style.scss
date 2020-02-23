@@ -1,53 +1,78 @@
 @import 'variables.scss';
 
 .Comment {
-    margin: 2em 0;
+    margin-top: 1em;
 
-    & > .Comment {
-        padding-left: 1.5em;
-        border-left: 1px solid $color-darker;
+    &:not(.ShowMore) {
+        display: grid;
+        grid-template-columns: 15px 1fr;
+    }
+
+
+    .ShowMore {
+        font-size: 0.8em;
+        font-weight: bold;
+        text-decoration: none;
+    }
+
+    .toggle {
+        border-left: 2px solid $color-darkest;
         &:hover {
-            border-left: 1px solid $color-dark;
+            border-left: 2px solid $color-medium;
+            cursor: pointer;
         }
     }
 
-    .body {
-        & > p {
-            margin-top: 1em;
-            margin-bottom: 0.3em;
-        }
+    >.content .Comment {
+        margin: 1.5em 0.5em 0em 0.5em;
+    }
 
-        .author {
-            color: $color-text;
-            font-weight: 600;
-            margin-right: 0.5em;
+    .content {
+        .body {
+            & > p {
+                margin-top: 1em;
+                margin-bottom: 0.3em;
+            }
 
-            &.op {
-                padding: 0 5px;
-                border-radius: $border-radius;
-                background-color: rgba(178, 34, 34, 0.5);
+            .stickied {
+                font-weight: bold;
+                color: greenyellow;
+            }
+
+            .header {
+                color: $color-medium;
+                .author {
+                    color: $color-text;
+                    font-weight: 600;
+                    margin-right: 0.5em;
+
+                    &.op {
+                        padding: 0 5px;
+                        border-radius: $border-radius-tiny;
+                        background-color: rgba(178, 34, 34, 0.5);
+                    }
+                }
+            }
+
+            .text {
+                blockquote {
+                    background-color: $color-darkest;
+                    border-left: 5px solid $color-dark;
+                    padding: 0 0 0 1em;
+                    margin: 0.5em 0;
+                }
+                p:first-child {
+                    margin-top: 0.3em;
+                }
             }
         }
+    }
 
-        .stickied {
-            font-weight: bold;
-            color: greenyellow;
-        }
-
-        .header {
+    &.hidden > .content > .body > .header {
+        font-style: italic;
+        >.author {
             color: $color-medium;
-        }
-
-        .text {
-            blockquote {
-                background-color: $color-darkest;
-                border-left: 5px solid $color-dark;
-                padding: 0 0 0 1em;
-                margin: 0.5em 0;
-            }
-            p:first-child {
-                margin-top: 0.3em;
-            }
+            font-weight: normal;
         }
     }
 }

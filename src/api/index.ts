@@ -1,4 +1,4 @@
-// import snoowrap, { Listing, Submission } from 'snoowrap';
+import snoowrap from 'snoowrap';
 // https://www.reddit.com/prefs/apps
 
 // TODO: todo rewrite with snoowrap
@@ -7,12 +7,12 @@
 // handle voting and commenting?
 // saving, subscriptions and custom multis, etc ...
 
-// const r = new snoowrap({
-//     userAgent: 'Reddit-Lite-v0.1',
-//     clientId: process.env.REACT_APP_TWITCH_APP_ID,
-//     clientSecret: process.env.REACT_APP_TWITCH_APP_SECRET,
-//     refreshToken: process.env.REACT_APP_TWITCH_APP_REFRESH_TOKEN
-// });
+const r = new snoowrap({
+    userAgent: 'Reddit-Lite-v' + process.env.REACT_APP_VERSION,
+    clientId: process.env.REACT_APP_TWITCH_APP_ID,
+    clientSecret: process.env.REACT_APP_TWITCH_APP_SECRET,
+    refreshToken: process.env.REACT_APP_TWITCH_APP_REFRESH_TOKEN
+});
 
 const postCache = new Map<string, any>();
 
@@ -26,7 +26,6 @@ export default {
                 .then(response => response.text())
                 .then(JSON.parse)
                 .then(resolve)
-                // .then(result => setTimeout(() => resolve(result), 2000))
                 .catch(() =>
                     reject(`Could not fetch top for reddit.com/r/${subreddit}/${s}.json${q}`)
                 );

@@ -1,8 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import './style.scss';
 import LoadingAnimation from '../LoadingAnimation';
-import Embeddable from '../Embeddable';
 
 interface Props {
     className: string;
@@ -11,9 +9,7 @@ interface Props {
 export default function Link(props: Props) {
     const post = useSelector((state: State) => state.post);
     const [isImage, setIsImage] = React.useState(false);
-    const [isLoadable, setIsLoadable] = React.useState(true);
     const [isLoading, setIsLoading] = React.useState(true);
-    const [showEmbed, setShowEmbed] = React.useState(false);
 
     React.useEffect(() => {
         setIsLoading(true);
@@ -24,7 +20,6 @@ export default function Link(props: Props) {
                     setIsLoading(false);
                 })
                 .catch(() => {
-                    setIsLoadable(false);
                     setIsLoading(false)
                 })
         })();
@@ -47,12 +42,6 @@ export default function Link(props: Props) {
             >
                 {isImage ? <img src={post.url} alt="Direct link" /> : 'Direct link'}
             </a>
-            {(!isLoadable) && <React.Fragment>
-                <span className='link toggleEmbeddable' onClick={() => setShowEmbed(!showEmbed)}>
-                    {showEmbed ? 'Hide embedded content' : 'Show embedded content'}
-                </span>
-                {showEmbed && <Embeddable url={post.url} />}
-            </React.Fragment>}
         </div>
     )
 }
