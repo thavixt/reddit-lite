@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import './style.scss';
 
 import { deleteSavedSubReddit, getSavedSubs, saveSubReddit } from '../../utils';
 

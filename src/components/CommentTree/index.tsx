@@ -1,7 +1,7 @@
 import React from 'react';
 import unescape from 'unescape';
+
 import Reddit from '../../api';
-import './style.scss';
 import Awards from '../Awards';
 import LoadingAnimation from '../LoadingAnimation';
 import Timestamp from '../Timestamp';

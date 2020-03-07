@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import unescape from 'unescape';
-import './style.scss';
+
 import Awards from '../Awards';
 import CommentTree from '../CommentTree';
 import Flair from '../Flair';

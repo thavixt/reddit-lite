@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import './style.scss';
+
 import LoadingAnimation from '../LoadingAnimation';
 import Reddit from '../../api';
 import Post from '../Post';
