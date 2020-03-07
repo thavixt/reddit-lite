@@ -8,16 +8,17 @@ on:
 jobs:
   build:
     name: push-gh-pages
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-16.04
     steps:
-      - name: "Checkout source code"
+      - name: Checkout source code
         uses: "actions/checkout@v1"
-      - name: "Setup Node.js"
+      - name: Setup Node.js
         uses: "actions/setup-node@v1"
         with:
           node-version: 12.16.1
       - name: Install dependencies
         run: npm install
-      - name: "Publish gh-pages"
-        id: deploy
-        run: npm run deploy
+      - name: Build
+        run: react-scripts build
+      - name: Publish gh-pages"
+        run: gh-pages -d build
