@@ -1,4 +1,4 @@
-![publish-on-gh-pages](https://github.com/thavixt/reddit-lite/workflows/publish-on-gh-pages/badge.svg?branch=master&event=push)
+![gh-pages](https://github.com/thavixt/reddit-lite/workflows/publish-on-gh-pages/badge.svg?branch=master&event=push)
 
 # Reddit-Lite
 
