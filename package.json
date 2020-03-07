@@ -1,6 +1,6 @@
 {
   "name": "reddit-lite",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "homepage": "https://thavixt.github.io/reddit-lite",
   "dependencies": {
@@ -23,16 +23,13 @@
     "unescape": "^1.0.1"
   },
   "devDependencies": {
-    "@types/webpack-env": "^1.15.1",
-    "gh-pages": "^2.2.0"
+    "@types/webpack-env": "^1.15.1"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": "react-app"
