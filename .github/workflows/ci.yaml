@@ -21,8 +21,8 @@ jobs:
       - name: Install dependencies
         run: npm install
       - name: "Publish gh-pages"
-        id: publish
-        run: npm run publish
+        id: deploy
+        run: npm run deploy
       # This step prints an output from the previous step's action.
       - name: "Print output"
-        run: echo '${{ steps.publish }}.'
+        run: echo '${{ steps.deploy }}.'

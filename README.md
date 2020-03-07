@@ -1,3 +1,5 @@
+![publish-on-gh-pages](https://github.com/thavixt/reddit-lite/workflows/publish-on-gh-pages/badge.svg?branch=master&event=push)
+
 # Reddit-Lite
 
 Reddit-lite is a lightweight Reddit client for personal use.
