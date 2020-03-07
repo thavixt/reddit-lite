@@ -7,9 +7,7 @@ on:
 
 jobs:
   build:
-    # Job name is Greeting
     name: push-gh-pages
-    # This job runs on Linux
     runs-on: ubuntu-latest
     steps:
       - name: "Checkout source code"
@@ -17,12 +15,9 @@ jobs:
       - name: "Setup Node.js"
         uses: "actions/setup-node@v1"
         with:
-          node-version: '10.x'
+          node-version: 12.16.1
       - name: Install dependencies
         run: npm install
       - name: "Publish gh-pages"
         id: deploy
         run: npm run deploy
-      # This step prints an output from the previous step's action.
-      - name: "Print output"
-        run: echo '${{ steps.deploy }}.'
