@@ -31,7 +31,7 @@ export default function Page(props: Props) {
         if (ref && ref.current) {
             ref.current.scrollTo(0, 0)
         }
-    }, [post.id]);
+    }, [post]);
 
     if (!post) {
         return null;
