@@ -27,6 +27,9 @@
 	$small: 24px;
 	$small-duration: 0.8s;
 
+	$large: 60px;
+	$large-duration: 1s;
+
 	margin: 5px 0;
 	display: flex;
 	flex-direction: column;
@@ -35,10 +38,10 @@
 	width: 100%;
 	height: 100%;
 
-	&.small {
-		justify-content: center;
-		align-items: center;
+	justify-content: center;
+	align-items: center;
 
+	&.small {
 		.lds-dual-ring {
 			width: $small;
 			height: $small;
@@ -47,6 +50,18 @@
 			width: $small;
 			height: $small;
 			animation-duration: $small-duration;
+		}
+	}
+
+	&.large {
+		.lds-dual-ring {
+			width: $large;
+			height: $large;
+		}
+		.lds-dual-ring:after {
+			width: $large;
+			height: $large;
+			animation-duration: $large-duration;
 		}
 	}
 }

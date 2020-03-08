@@ -1,5 +1,7 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+
+import User from '../User';
 
 import { deleteSavedSubReddit, getSavedSubs, saveSubReddit } from '../../utils';
 
@@ -25,10 +27,10 @@ export default function FeedSelector() {
     const currentSubReddit = useSelector((state: State) => state.subReddit);
     const sort = useSelector((state: State) => state.sort);
     const timeFrame = useSelector((state: State) => state.timeFrame);
-    const [isSubsOpen, setSubsOpen] = React.useState(false);
-    const [isSortOpen, setSortOpen] = React.useState(false);
-    const [isTimeOpen, setTimeOpen] = React.useState(false);
-    const [updateCounter, update] = React.useState(0);
+    const [isSubsOpen, setSubsOpen] = useState(false);
+    const [isSortOpen, setSortOpen] = useState(false);
+    const [isTimeOpen, setTimeOpen] = useState(false);
+    const [updateCounter, update] = useState(0);
 
     useEffect(() => {
         if (inputRef.current) {
@@ -90,6 +92,13 @@ export default function FeedSelector() {
                 setTimeOpen(false);
             }}
         >
+            <div className="UserContainer" onMouseEnter={() => {
+                setSubsOpen(false);
+                setSortOpen(false);
+                setTimeOpen(false);
+            }}>
+                <User />
+            </div>
             <div className="selectors">
                 <div
                     className={isSubsOpen ? 'open' : ''}

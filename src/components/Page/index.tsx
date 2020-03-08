@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import unescape from 'unescape';
 
@@ -18,17 +18,20 @@ interface Props {
 }
 
 export default function Page(props: Props) {
-    const dispatch = useDispatch();
-    let post = useSelector((state: State) => state.post);
-    let subReddit = useSelector((state: State) => state.subReddit);
     const { crossPostLevel = 0 } = props;
 
+    const dispatch = useDispatch();
     const ref = React.useRef<HTMLDivElement>(null);
+    const currentPost = useSelector((state: State) => state.post);
+    const subReddit = useSelector((state: State) => state.subReddit);
+
+    let post = currentPost;
+
     React.useEffect(() => {
         if (ref && ref.current) {
             ref.current.scrollTo(0, 0)
         }
-    }, [post]);
+    }, [post.id]);
 
     if (!post) {
         return null;
@@ -58,23 +61,7 @@ export default function Page(props: Props) {
 
     const content = post.crosspost_parent_list
         ? <Page className="crossPost" crossPostLevel={crossPostLevel + 1} />
-        : <div className="content">
-            {embed && <div
-                className="embed"
-                dangerouslySetInnerHTML={{ __html: unescape(embed) }}
-            />}
-            {video && <video controls className="video">
-                <source
-                    src={video}
-                    type="video/webm"
-                />
-            </video>}
-            <div
-                className="html"
-                dangerouslySetInnerHTML={{ __html: unescape(post.selftext_html) }}
-            />
-            {!embed && !video && post.url && <Link className="url" />}
-        </div>;
+        : <Content embed video={video} selftext={post.selftext_html} url={post.url} />
 
     const flairs = post.link_flair_richtext.map((e: Reddit.Flair, i: number) =>
         <Flair key={i} {...e} />
@@ -136,4 +123,46 @@ export default function Page(props: Props) {
             </div>
         </div >
     )
+}
+
+
+interface ContentProps {
+    embed: boolean;
+    video: string | null;
+    selftext: string;
+    url: string | null;
+}
+
+function Content(props: ContentProps) {
+    const { embed, selftext, url, video } = props;
+    const [ready, isReady] = useState(false);
+
+    useEffect(() => {
+        isReady(false);
+        setTimeout(() => isReady(true), 1);
+    }, [embed, selftext, url, video]);
+
+    if (!ready) {
+        return <LoadingAnimation />
+    }
+
+    return (
+        <div className="content">
+            {embed && <div
+                className="embed"
+                dangerouslySetInnerHTML={{ __html: unescape(embed) }}
+            />}
+            {video && <video controls className="video">
+                <source
+                    src={video}
+                    type="video/webm"
+                />
+            </video>}
+            <div
+                className="html"
+                dangerouslySetInnerHTML={{ __html: unescape(selftext) }}
+            />
+            {!embed && !video && url && <Link className="url" url={url} />}
+        </div>
+    );
 }

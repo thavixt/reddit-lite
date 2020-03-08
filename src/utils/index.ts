@@ -4,7 +4,7 @@ export async function setLinkTargets(target: string) {
     }
 }
 
-export function setQueryParam(key: string, value: string) {
+export function setQueryParam(key: string, value: string | null) {
     const params = new URLSearchParams(window.location.search);
 
     if (value) {

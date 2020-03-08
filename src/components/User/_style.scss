@@ -1,0 +1,32 @@
+.User {
+    $icon-size: 18px;
+
+    padding: 5px 3px 3px 3px;
+    display: flex;
+    width: 100%;
+
+    .login, .logout {
+        
+    }
+
+    .user {
+        display: flex;
+        flex-grow: 2;
+        .userKarma {
+            text-align: right;
+            flex-grow: 2;
+        }
+        .userName {
+            padding: 0 0.5em;
+            &::before {
+                content: '-';
+                padding-right: 0.5em;
+            }
+        }
+        .userIcon {
+            height: $icon-size;
+            width: $icon-size;
+            border-radius: 25%;
+        }
+    }
+}

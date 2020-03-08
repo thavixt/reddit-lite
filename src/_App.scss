@@ -56,6 +56,23 @@ a, .link {
     height: 100vh;
 }
 
+.full {
+    display: block;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+}
+
+.center {
+    display: flex;
+    >* {
+        align-content: center;
+        align-items: center;
+        align-self: center;
+        justify-content: center;
+    }
+}
+
 .FeedContainer {
     position: relative;
     height: 100vh;

@@ -1,20 +1,20 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import LoadingAnimation from '../LoadingAnimation';
 
 interface Props {
     className: string;
+    url: string;
 }
 
 export default function Link(props: Props) {
-    const post = useSelector((state: State) => state.post);
+    const { url } = props;
     const [isImage, setIsImage] = React.useState(false);
     const [isLoading, setIsLoading] = React.useState(true);
 
     React.useEffect(() => {
         setIsLoading(true);
-        post && (async function () {
-            tryImage(post.url)
+        url && (async function () {
+            tryImage(url)
                 .then(() => {
                     setIsImage(true);
                     setIsLoading(false);
@@ -23,24 +23,24 @@ export default function Link(props: Props) {
                     setIsLoading(false)
                 })
         })();
-    }, [post]);
+    }, [url]);
 
     if (isLoading) {
         return <LoadingAnimation />;
     }
 
-    if (!post) {
+    if (!url) {
         return null;
     }
 
     return (
         <div className={`Link ${props.className}`}>
             <a
-                href={post.url}
+                href={url}
                 target="_blank"
                 rel="noopener noreferrer"
             >
-                {isImage ? <img src={post.url} alt="Direct link" /> : 'Direct link'}
+                {isImage ? <img src={url} alt="Direct link" /> : 'Direct link'}
             </a>
         </div>
     )

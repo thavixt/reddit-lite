@@ -26,7 +26,9 @@ export default function Post(props: Props) {
 
     return (
         <div className={'Post' + (post.id === currentPostId ? ' highlighted' : '')}
-            onClick={() => dispatch({ type: 'SET_POST', payload: post, })}
+            onClick={() => {
+                dispatch({ type: 'SET_POST', payload: post });
+            }}
         >
             <Votes className="score" score={post.score} arrows />
             <div className='thumbnail'>

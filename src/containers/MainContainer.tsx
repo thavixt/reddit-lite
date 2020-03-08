@@ -1,8 +1,8 @@
-import React from 'react';
+import React from 'react'
 
 import FeedList from '../components/FeedList'
-import FeedSelector from '../components/FeedSelector';
-import Page from '../components/Page';
+import FeedSelector from '../components/FeedSelector'
+import Page from '../components/Page'
 
 export default function () {
     return (

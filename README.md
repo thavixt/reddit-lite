@@ -10,9 +10,11 @@ This project was made with the create-react-app Typescript template.
 
 ## TODOs
 
+- [ ] voting
+- [ ] user subscriptions
+- [ ] commenting
 - [ ] not all post title flairs visible (?)
 - [ ] HTML entities in window title
-- [ ] embedded content not changing sometimes on post/page change
 - [ ] CommentBranch : load more button
 - [ ] Page
     - [ ] jump to top btn
@@ -23,12 +25,10 @@ This project was made with the create-react-app Typescript template.
 ## Ideas
 
 - [ ] keyboard navigation
-- [ ] upvote and downvote -> use [snoowrap](https://github.com/not-an-aardvark/snoowrap)
-    - [ ] login? auth?
 - [ ] fetch / add / store subreddit list?
 - [ ] handle urls?
-    - [ ] sub
-        - [ ] current sort & timeframe
+    - [x] sub
+        - [x] current sort & timeframe
     - [ ] post
         - [ ] consider crosspost
 - [ ] mobile layout
@@ -38,9 +38,12 @@ This project was made with the create-react-app Typescript template.
 
 ## Done
 
+- [x] auth with Reddit.com
+- [x] use github workflow to build and deploy on push to master
+- [x] embedded content not changing sometimes on post/page change
 - [x] dotenv
 - [x] upgrade to latest creat-react-app
 - [x] typescript
     - [x] global types `types/index.d.ts`
 - [x] sass stylsheets
-    - [x] global variables in `src/variables.scss` (place elsewhere?)
+    - [x] global variables in `src/variables.scss`

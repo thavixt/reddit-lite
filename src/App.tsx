@@ -1,14 +1,27 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 
 import MainContainer from './containers/MainContainer'
+import LoadingAnimation from './components/LoadingAnimation'
+
+import Reddit from './api'
 
 const App: React.FC = () => {
 	const post = useSelector((state: State) => state.post);
 	const subReddit = useSelector((state: State) => state.subReddit);
 
-	React.useEffect(() => {
-		if (post) {
+	const [hasCreatedAPIInstance, setHasCreatedAPIInstance] = useState(false);
+
+	useEffect(() => {
+		Reddit.auth()
+			.then(() => new Promise((resolve) => {
+				setTimeout(resolve, 1000);
+			}))
+			.then(() => setHasCreatedAPIInstance(true));
+	}, []);
+
+	useEffect(() => {
+		if (post && post.title) {
 			document.title = post.title;
 		}
 		else if (subReddit) {
@@ -18,9 +31,15 @@ const App: React.FC = () => {
 
 	return (
 		<div className="App">
-			<MainContainer />
+			{hasCreatedAPIInstance ? <>
+				<MainContainer />
+			</> :
+				<div className="full center">
+					<LoadingAnimation size="large" />
+				</div>
+			}
 		</div>
-	);
+	)
 }
 
 export default App;
