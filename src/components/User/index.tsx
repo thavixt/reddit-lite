@@ -10,9 +10,12 @@ export default function () {
 
     useEffect(() => {
         (async () => {
-            const inst = await Reddit.getInstance();
+            await Reddit.getInstance();
+            // await Promise.resolve()
+            //     .then(() => new Promise((resolve) => {
+            //         setTimeout(resolve, 1000);
+            //     }))
             setInstanceExists(true);
-
             Reddit.getUser()
                 .then(setUser);
         })();
@@ -25,9 +28,13 @@ export default function () {
         <span className="userKarma">{user.comment_karma} karma</span>
         <span className="userName">{user.name}</span>
         <img className="userIcon" src={user.icon_img} alt="User profile image" />
-    </div> : (authenticated ? (
-        <LoadingAnimation size="small" />
-    ) : null)
+    </div> : null;
+
+    if (!instanceExists) {
+        return <div className="User">
+            <LoadingAnimation size="tiny" />
+        </div>
+    }
 
     return (
         <div className="User">
@@ -35,7 +42,7 @@ export default function () {
                 <button className="logout" onClick={Reddit.logout}>Log out</button>
                 : <button className="login" onClick={Reddit.redirectAuth}>Log in</button>
             }
-            {userBlock}
+            {isLoggedIn ? userBlock : null}
         </div>
     )
 } 

@@ -24,11 +24,18 @@
 }
 
 .LoadingAnimation {
+	$tiny: 20px;
+	$tiny-width: 3px;
+	$tiny-duration: 0.8s;
+
 	$small: 24px;
 	$small-duration: 0.8s;
 
 	$large: 60px;
 	$large-duration: 1s;
+
+	$huge: 120px;
+	$huge-duration: 1.3s;
 
 	margin: 5px 0;
 	display: flex;
@@ -40,6 +47,19 @@
 
 	justify-content: center;
 	align-items: center;
+
+	&.tiny {
+		.lds-dual-ring {
+			width: $tiny;
+			height: $tiny;
+		}
+		.lds-dual-ring:after {
+			border-width: $tiny-width;
+			width: $tiny;
+			height: $tiny;
+			animation-duration: $tiny-duration;
+		}
+	}
 
 	&.small {
 		.lds-dual-ring {
@@ -62,6 +82,18 @@
 			width: $large;
 			height: $large;
 			animation-duration: $large-duration;
+		}
+	}
+
+	&.huge {
+		.lds-dual-ring {
+			width: $huge;
+			height: $huge;
+		}
+		.lds-dual-ring:after {
+			width: $huge;
+			height: $huge;
+			animation-duration: $huge-duration;
 		}
 	}
 }

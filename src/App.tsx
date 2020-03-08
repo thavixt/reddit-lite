@@ -35,7 +35,7 @@ const App: React.FC = () => {
 				<MainContainer />
 			</> :
 				<div className="full center">
-					<LoadingAnimation size="large" />
+					<LoadingAnimation size="huge" />
 				</div>
 			}
 		</div>

@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface Props {
-    size?: 'large' | 'small';
+    size?: 'tiny' | 'small' | 'large' | 'huge';
 }
 
 export default function LoadingAnimation(props: Props) {

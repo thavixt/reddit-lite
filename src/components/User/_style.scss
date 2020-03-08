@@ -3,15 +3,22 @@
 
     padding: 5px 3px 3px 3px;
     display: flex;
+    text-align: right;
     width: 100%;
 
+    >.LoadingAnimation {
+        margin: 0;
+        padding: 0;
+    }
+
     .login, .logout {
-        
+        width: 6em;
     }
 
     .user {
         display: flex;
         flex-grow: 2;
+        padding: 0 3px;
         .userKarma {
             text-align: right;
             flex-grow: 2;
