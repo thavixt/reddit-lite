@@ -61,7 +61,7 @@ export default function Page(props: Props) {
 
     const content = post.crosspost_parent_list
         ? <Page className="crossPost" crossPostLevel={crossPostLevel + 1} />
-        : <Content embed video={video} selftext={post.selftext_html} url={post.url} />
+        : <Content embed={embed} video={video} selftext={post.selftext_html} url={post.url} />
 
     const flairs = post.link_flair_richtext.map((e: Reddit.Flair, i: number) =>
         <Flair key={i} {...e} />
@@ -127,7 +127,7 @@ export default function Page(props: Props) {
 
 
 interface ContentProps {
-    embed: boolean;
+    embed: any;
     video: string | null;
     selftext: string;
     url: string | null;
