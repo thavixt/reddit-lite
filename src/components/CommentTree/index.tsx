@@ -51,6 +51,8 @@ export default function CommentTree(props: Props) {
 }
 
 function ShowMore(props: Reddit.Comment) {
+    // TODO: functionality
+    // eslint-disable-next-line
     const [more, loadMore] = React.useState(null);
     const [isLoading, setIsLoading] = React.useState(false);
 
