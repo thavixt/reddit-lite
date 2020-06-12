@@ -13,7 +13,7 @@ body {
 }
 
 .App {
-    max-width: 1100px;
+    max-width: 1300px;
     margin: auto;
     min-height: 100vh;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -80,4 +80,8 @@ a, .link {
 .PageContainer {
     height: 100vh;
     overflow: hidden;
+}
+
+.commentCount {
+    color: $color-medium;
 }

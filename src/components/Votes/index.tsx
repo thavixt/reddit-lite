@@ -8,8 +8,7 @@ interface Props {
 }
 
 export default function Votes(props: Props) {
-    let { score } = props;
-
+    const { score } = props;
     const truncatedScore = score > 1000
         ? `${Math.round(score / 1000 * 10) / 10}K`
         : score;

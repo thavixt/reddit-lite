@@ -7,8 +7,7 @@ import Flair from '../Flair';
 import Timestamp from '../Timestamp';
 import Votes from '../Votes';
 
-// const REDDIT_BASE_URL = 'https://reddit.com'
-const SELF_POST_THUMB_SRC = `${process.env.PUBLIC_URL}/horizontal-lines.png`;
+import defaultThumbImage from '../../images/horizontal-lines.png';
 
 interface Props {
     post: Reddit.Post;
@@ -16,12 +15,8 @@ interface Props {
 
 export default function Post(props: Props) {
     const { post } = props;
-
     const dispatch = useDispatch();
     const currentPostId = useSelector((state: State) => state.post && state.post.id);
-
-    const hasThumbnail = post.thumbnail && post.thumbnail !== 'self';
-    const thumb_url = hasThumbnail ? post.thumbnail : SELF_POST_THUMB_SRC;
     const flairs = post.link_flair_richtext.map((e, i) => <Flair key={i} {...e} />);
 
     return (
@@ -31,11 +26,7 @@ export default function Post(props: Props) {
             }}
         >
             <Votes className="score" score={post.score} arrows />
-            <div className='thumbnail'>
-                <a href={post.url} target='blank' rel="noreferrer noopener">
-                    <img className={hasThumbnail ? '' : 'default'} src={thumb_url} alt="thumb" />
-                </a>
-            </div>
+            <Thumbnail url={post.url} thumbnail={post.thumbnail} />
             <div className="details">
                 <small className='author'>u/{post.subreddit}</small>
                 -
@@ -51,4 +42,19 @@ export default function Post(props: Props) {
             </div>
         </div>
     )
+}
+
+function Thumbnail({ url, thumbnail }: { url: string, thumbnail: string }) {
+    const defaultImg = thumbnail === 'self' || thumbnail === 'default';
+    return (
+        <div className='thumbnail'>
+            <a href={url} target='blank' rel="noreferrer noopener">
+                <img
+                    className={defaultImg ? 'default' : ''}
+                    src={defaultImg ? defaultThumbImage : thumbnail}
+                    alt="thumbnail"
+                />
+            </a>
+        </div>
+    );
 }

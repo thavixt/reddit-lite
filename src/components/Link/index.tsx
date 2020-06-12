@@ -40,7 +40,7 @@ export default function Link(props: Props) {
                 target="_blank"
                 rel="noopener noreferrer"
             >
-                {isImage ? <img src={url} alt="Direct link" /> : 'Direct link'}
+                {isImage ? <img src={url} alt="Direct link" /> : url}
             </a>
         </div>
     )

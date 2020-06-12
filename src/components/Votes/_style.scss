@@ -10,15 +10,12 @@
             display: flex;
             justify-content: center;
             align-self: center;
+            &.upvote {
+                align-self: end;
+            }
+            &.downvote {
+                align-self: start;
+            }
         }
-    }
-
-    &.arrows 
-    &.arrows span.upvote {
-        align-self: end;
-    }
-
-    &.arrows span.downvote {
-        align-self: start;
     }
 }

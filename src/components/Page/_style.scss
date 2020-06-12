@@ -53,6 +53,8 @@
             max-height: 80vh;
             max-width: 100%;
             // width: auto;
+            // TODO: temporary hack for for overflowing iframe content
+            overflow: auto;
         }
     }
 

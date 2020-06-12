@@ -134,7 +134,7 @@ async function auth() {
 function redirectAuth() {
     const authURL = snoowrap.getAuthUrl({
         clientId: CLIENT_ID!,
-        scope: ['account', 'edit', 'history', 'identity', 'modflair', 'modlog', 'modmail', 'modposts', 'modself', 'modwiki', 'mysubreddits', 'privatemessages', 'read', 'report', 'save', 'submit', 'subscribe', 'vote', 'wikiedit', 'wikiread'],
+        scope: ['account', 'edit', 'history', 'identity', 'mysubreddits', 'privatemessages', 'read', 'report', 'save', 'submit', 'subscribe', 'vote'],
         redirectUri: REDIRECT_URI! + window.location.search,
         permanent: true,
         state: 'authenticated'

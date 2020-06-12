@@ -1,3 +1,7 @@
+const DEFAULT_SUBS = [
+    'all', 'popular',
+]
+
 export async function setLinkTargets(target: string) {
     for (let i = 0; i < document.links.length; i++) {
         document.links[i].target = target;
@@ -35,8 +39,12 @@ export function saveSubReddit(sub: string) {
 }
 
 export function getSavedSubs(): string[] {
-    const stored = localStorage.getItem('savedSubReddits');
-    return stored ? JSON.parse(stored) : [];
+    const json = localStorage.getItem('savedSubReddits');
+    if (json) {
+        return JSON.parse(json);
+    } else {
+        return DEFAULT_SUBS;
+    };
 }
 
 export function deleteSavedSubReddit(sub: string) {

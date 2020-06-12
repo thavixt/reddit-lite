@@ -59,10 +59,6 @@ export default function Page(props: Props) {
         ? post.media.reddit_video.fallback_url
         : null;
 
-    const content = post.crosspost_parent_list
-        ? <Page className="crossPost" crossPostLevel={crossPostLevel + 1} />
-        : <Content embed={embed} video={video} selftext={post.selftext_html} url={post.url} />
-
     const flairs = post.link_flair_richtext.map((e: Reddit.Flair, i: number) =>
         <Flair key={i} {...e} />
     );
@@ -103,43 +99,31 @@ export default function Page(props: Props) {
                     <Awards awards={post.all_awardings} />
                 </div>
             </div>
-            {content}
-            <div className="comments">
-                <p className="count">
-                    {post.num_comments > 0 && <span className="commentCount">
-                        {post.num_comments} comment{post.num_comments > 1 && 's'}
-                    </span>}
-                    <span>&nbsp;
-                        <a className="redditLink"
-                            href={REDDIT_BASE_URL + post.permalink}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
-                            (open on reddit.com)
-                        </a>
-                    </span>
-                </p>
-                {crossPostLevel > 0 ? null : <CommentTree sub={post.subreddit} id={post.id} />}
-            </div>
+            {post.crosspost_parent_list
+                ? <Page className="crossPost" crossPostLevel={crossPostLevel + 1} />
+                : <Content
+                    embed={embed}
+                    video={video}
+                    selftext={post.selftext_html}
+                    url={post.url}
+                />
+            }
+            <Comments post={post} crossPostLevel={crossPostLevel} />
         </div >
     )
 }
 
-
-interface ContentProps {
+function Content({ embed, selftext, url, video }: {
     embed: any;
     video: string | null;
     selftext: string;
     url: string | null;
-}
-
-function Content(props: ContentProps) {
-    const { embed, selftext, url, video } = props;
-    const [ready, isReady] = useState(false);
+}) {
+    const [ready, setReady] = useState(false);
 
     useEffect(() => {
-        isReady(false);
-        setTimeout(() => isReady(true), 1);
+        setReady(false);
+        setTimeout(() => setReady(true), 1);
     }, [embed, selftext, url, video]);
 
     if (!ready) {
@@ -153,10 +137,7 @@ function Content(props: ContentProps) {
                 dangerouslySetInnerHTML={{ __html: unescape(embed) }}
             />}
             {video && <video controls className="video">
-                <source
-                    src={video}
-                    type="video/webm"
-                />
+                <source src={video} type="video/webm" />
             </video>}
             <div
                 className="html"
@@ -165,4 +146,26 @@ function Content(props: ContentProps) {
             {!embed && !video && url && <Link className="url" url={url} />}
         </div>
     );
+}
+
+function Comments({ post, crossPostLevel }: { post: Reddit.Post, crossPostLevel: number }) {
+    return (
+        <div className="comments">
+            <p className="count">
+                {post.num_comments > 0 && <span className="commentCount">
+                    {post.num_comments} comment{post.num_comments > 1 && 's'}
+                </span>}
+                <span>&nbsp;
+                    <a className="redditLink"
+                        href={REDDIT_BASE_URL + post.permalink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        (open on reddit.com)
+                    </a>
+                </span>
+            </p>
+            {crossPostLevel > 0 ? null : <CommentTree sub={post.subreddit} id={post.id} />}
+        </div>
+    )
 }

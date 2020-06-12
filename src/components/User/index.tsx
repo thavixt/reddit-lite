@@ -27,7 +27,7 @@ export default function () {
     const userBlock = (isLoggedIn && user) ? <div className="user">
         <span className="userKarma">{user.comment_karma} karma</span>
         <span className="userName">{user.name}</span>
-        <img className="userIcon" src={user.icon_img} alt="User profile image" />
+        <img className="userIcon" src={user.icon_img} alt="User profile" />
     </div> : null;
 
     if (!instanceExists) {
@@ -38,8 +38,8 @@ export default function () {
 
     return (
         <div className="User">
-            {isLoggedIn ?
-                <button className="logout" onClick={Reddit.logout}>Log out</button>
+            {isLoggedIn
+                ? <button className="logout" onClick={Reddit.logout}>Log out</button>
                 : <button className="login" onClick={Reddit.redirectAuth}>Log in</button>
             }
             {isLoggedIn ? userBlock : null}
