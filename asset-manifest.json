@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/reddit-lite/static/css/main.8eac5511.chunk.css",
+    "main.js": "/reddit-lite/static/js/main.809fc115.chunk.js",
+    "main.js.map": "/reddit-lite/static/js/main.809fc115.chunk.js.map",
+    "runtime-main.js": "/reddit-lite/static/js/runtime-main.09cf6c25.js",
+    "runtime-main.js.map": "/reddit-lite/static/js/runtime-main.09cf6c25.js.map",
+    "static/js/2.47abe4d0.chunk.js": "/reddit-lite/static/js/2.47abe4d0.chunk.js",
+    "static/js/2.47abe4d0.chunk.js.map": "/reddit-lite/static/js/2.47abe4d0.chunk.js.map",
+    "index.html": "/reddit-lite/index.html",
+    "precache-manifest.79af3f8e168f6931fae1fd2b0626afd2.js": "/reddit-lite/precache-manifest.79af3f8e168f6931fae1fd2b0626afd2.js",
+    "service-worker.js": "/reddit-lite/service-worker.js",
+    "static/css/main.8eac5511.chunk.css.map": "/reddit-lite/static/css/main.8eac5511.chunk.css.map",
+    "static/js/2.47abe4d0.chunk.js.LICENSE.txt": "/reddit-lite/static/js/2.47abe4d0.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.09cf6c25.js",
+    "static/js/2.47abe4d0.chunk.js",
+    "static/css/main.8eac5511.chunk.css",
+    "static/js/main.809fc115.chunk.js"
+  ]
+}
