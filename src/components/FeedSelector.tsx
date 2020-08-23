@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import User from '../User';
+import User from './User';
 
-import { deleteSavedSubReddit, getSavedSubs, saveSubReddit } from '../../utils';
+import { deleteSavedSubReddit, getSavedSubs, saveSubReddit } from '../utils';
 
 const sortTypes: { [key: string]: string } = {
     hot: 'Hot',

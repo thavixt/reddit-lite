@@ -1,11 +1,9 @@
 .Comment {
     margin-top: 1em;
-
     &:not(.ShowMore) {
         display: grid;
-        grid-template-columns: 15px 1fr;
+        grid-template-columns: 16px auto;
     }
-
 
     .ShowMore {
         font-size: 0.8em;
@@ -14,27 +12,46 @@
     }
 
     .toggle {
-        border-left: 2px solid $color-darkest;
+        hr {
+            width: 1px;
+            height: 100%;
+            border-color: $color-darker;
+        }
         &:hover {
-            border-left: 2px solid $color-medium;
             cursor: pointer;
+            hr {
+                border-color: $color-medium;
+            }
         }
     }
 
-    >.content .Comment {
+    .content .Comment {
         margin: 1.5em 0.5em 0em 0.5em;
     }
 
+    .side {
+        display: grid;
+        grid-template-rows: 45px auto;
+    }
+
     .content {
+        padding-left: 5px;
+
         .body {
+            padding: 0 4px;
             & > p {
                 margin-top: 1em;
                 margin-bottom: 0.3em;
             }
 
+            &.stickied {
+                border: 3px solid rgba(171, 255, 46, 0.3);
+                border-radius: $border-radius-small;
+            }
+
             .stickied {
                 font-weight: bold;
-                color: greenyellow;
+                color: rgb(171, 255, 46);
             }
 
             .header {
@@ -66,11 +83,18 @@
         }
     }
 
-    &.hidden > .content > .body > .header {
-        font-style: italic;
-        >.author {
-            color: $color-medium;
-            font-weight: normal;
+    &.hidden {
+        .side {
+            display: block;
+        }
+        .body {
+            .header {
+                font-style: italic;
+                >.author {
+                    color: $color-medium;
+                    font-weight: normal;
+                }
+            }
         }
     }
 }

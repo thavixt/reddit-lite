@@ -1,9 +1,9 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-import LoadingAnimation from '../LoadingAnimation';
-import Reddit from '../../api';
-import Post from '../Post';
+import Loading from './Loading';
+import Reddit from '../api';
+import Post from './Post';
 
 export default function FeedList() {
     const [after, setAfter] = React.useState(null);
@@ -52,8 +52,8 @@ export default function FeedList() {
     return (
         <div className='FeedList'>
             <div className="list" ref={ref}>
-                {feedList.length ? feedList : <LoadingAnimation />}
-                {loadingMore ? <LoadingAnimation size="small" /> : more}
+                {feedList.length ? feedList : <Loading />}
+                {loadingMore ? <Loading size="small" /> : more}
             </div>
         </div>
     );

@@ -1,13 +1,11 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import unescape from 'unescape';
-
-import Awards from '../Awards';
-import Flair from '../Flair';
-import Timestamp from '../Timestamp';
-import Votes from '../Votes';
-
-import defaultThumbImage from '../../images/horizontal-lines.png';
+import Awards from './Awards';
+import Flair from './Flair';
+import Thumbnail from './Post/Thumbnail';
+import Timestamp from './Timestamp';
+import Votes from './Votes';
 
 interface Props {
     post: Reddit.Post;
@@ -42,19 +40,4 @@ export default function Post(props: Props) {
             </div>
         </div>
     )
-}
-
-function Thumbnail({ url, thumbnail }: { url: string, thumbnail: string }) {
-    const defaultImg = thumbnail === 'self' || thumbnail === 'default';
-    return (
-        <div className='thumbnail'>
-            <a href={url} target='blank' rel="noreferrer noopener">
-                <img
-                    className={defaultImg ? 'default' : ''}
-                    src={defaultImg ? defaultThumbImage : thumbnail}
-                    alt="thumbnail"
-                />
-            </a>
-        </div>
-    );
 }

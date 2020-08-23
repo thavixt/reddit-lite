@@ -31,13 +31,12 @@ let userDataCache: Snoowrap.RedditUser | null = null;
 
 const postCache = new Map<string, any>();
 
-async function createInstance(): Promise<snoowrap> {
+export async function createInstance(): Promise<snoowrap> {
     return new Promise((resolve, reject) => {
         if (_instance) {
             resolve(_instance.authenticated || _instance.anonymous);
         }
 
-        console.info('creating scoowrap instance');
         const tokens = getTokens();
         if (tokens) {
             const r = new snoowrap({
@@ -71,7 +70,7 @@ async function createInstance(): Promise<snoowrap> {
     })
 }
 
-async function getInstance() {
+export async function getInstance() {
     if (_instance) {
         return _instance.authenticated || _instance.anonymous;
     }
@@ -98,19 +97,17 @@ function clearTokens() {
     window.localStorage.removeItem('redditRefreshToken');
 }
 
-async function auth() {
+export async function auth() {
     return new Promise((resolve) => {
         const code = new URL(window.location.href).searchParams.get('code');
 
         if (code) {
-            console.info('auth attempt');
             snoowrap.fromAuthCode({
                 code,
                 userAgent: USER_AGENT_STRING,
                 clientId: CLIENT_ID,
                 redirectUri: REDIRECT_URI,
             }).then((r) => {
-                console.log(r);
                 saveTokens(r.accessToken, r.refreshToken);
                 if (!_instance) {
                     _instance = {
@@ -119,7 +116,6 @@ async function auth() {
                     };
                 }
                 _instance.authenticated = r;
-                console.info('authenticated');
                 const params = new URL(window.location.href).searchParams;
                 params.delete('code');
                 params.delete('state');
@@ -131,23 +127,23 @@ async function auth() {
     })
 }
 
-function redirectAuth() {
+export function redirectAuth() {
     const authURL = snoowrap.getAuthUrl({
-        clientId: CLIENT_ID!,
+        clientId: CLIENT_ID,
         scope: ['account', 'edit', 'history', 'identity', 'mysubreddits', 'privatemessages', 'read', 'report', 'save', 'submit', 'subscribe', 'vote'],
-        redirectUri: REDIRECT_URI! + window.location.search,
+        redirectUri: REDIRECT_URI,
         permanent: true,
         state: 'authenticated'
     });
     window.location.href = authURL;
 }
 
-function logout() {
+export function logout() {
     clearTokens();
     window.location.href = BASE_PATH!;
 }
 
-function getUser(): Promise<Snoowrap.RedditUser> {
+export function getUser(): Promise<Snoowrap.RedditUser> {
     return new Promise((resolve) => {
         if (userDataCache) {
             resolve(userDataCache);
@@ -162,7 +158,27 @@ function getUser(): Promise<Snoowrap.RedditUser> {
     });
 }
 
-const isAuthenticated = () => (_instance && _instance.authenticated) ? true : false;
+export async function upvoteComment(id: string) {
+    const instance = await getInstance();
+    instance.getComment(id).upvote();
+}
+
+export async function downvoteComment(id: string) {
+    const instance = await getInstance();
+    instance.getComment(id).downvote();
+}
+
+export async function upvotePost(id: string) {
+    const instance = await getInstance();
+    instance.getSubmission(id).upvote();
+}
+
+export async function downvotePost(id: string) {
+    const instance = await getInstance();
+    instance.getSubmission(id).downvote();
+}
+
+export const isAuthenticated = () => (_instance && _instance.authenticated) ? true : false;
 
 export default {
     auth,

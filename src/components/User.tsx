@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Snoowrap from 'snoowrap';
 
-import Reddit from '../../api';
-import LoadingAnimation from '../LoadingAnimation';
+import Reddit from '../api';
+import Loading from './Loading';
 
 export default function () {
     const [instanceExists, setInstanceExists] = useState(false);
@@ -16,8 +16,10 @@ export default function () {
             //         setTimeout(resolve, 1000);
             //     }))
             setInstanceExists(true);
-            Reddit.getUser()
-                .then(setUser);
+            if (Reddit.isAuthenticated()) {
+                Reddit.getUser()
+                    .then(setUser);
+            }
         })();
     }, [])
 
@@ -32,7 +34,7 @@ export default function () {
 
     if (!instanceExists) {
         return <div className="User">
-            <LoadingAnimation size="tiny" />
+            <Loading size="tiny" />
         </div>
     }
 

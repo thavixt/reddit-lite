@@ -24,42 +24,32 @@ export default function Timestamp(props: Props) {
     return <span className={props.className}>{date} {time}</span>;
 }
 
-
 function getRelativeTime(timestamp: number) {
     const elapsed = Date.now() - timestamp;
+
+    const getRelative = (unit: string, denominator: number) => {
+        const round = Math.round(elapsed / denominator);
+        const s = round > 1 ? 's' : '';
+        return round + ` ${unit}${s} ago`;
+    }
 
     if (elapsed < msPerMinute) {
         return 'just now';
     }
-
     else if (elapsed < msPerHour) {
-        const round = Math.round(elapsed / msPerMinute);
-        const s = round > 1 ? 's' : '';
-        return round + ` minute${s} ago`;
+        return getRelative('minute', msPerMinute);
     }
-
     else if (elapsed < msPerDay) {
-        const round = Math.round(elapsed / msPerHour);
-        const s = round > 1 ? 's' : '';
-        return round + ` hour${s} ago`;
+        return getRelative('hour', msPerHour);
     }
-
     else if (elapsed < 30 * msPerDay) {
-        const round = Math.round(elapsed / msPerDay);
-        const s = round > 1 ? 's' : '';
-        return round + ` day${s} ago`;
+        return getRelative('day', msPerDay);
     }
-
     else if (elapsed < 12 * msPerMonth) {
-        const round = Math.round(elapsed / msPerMonth);
-        const s = round > 1 ? 's' : '';
-        return round + ` month${s} ago`;
+        return getRelative('month', msPerMonth);
     }
-
     else if (elapsed < 12 * msPerYear) {
-        const round = Math.round(elapsed / msPerYear);
-        const s = round > 1 ? 's' : '';
-        return round + ` year${s} ago`;
+        return getRelative('year', msPerYear);
     }
 
     return false;

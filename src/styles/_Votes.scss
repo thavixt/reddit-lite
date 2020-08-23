@@ -1,0 +1,49 @@
+.Votes {
+    display: inline;
+
+    &.arrows {
+        display: inline-grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr;
+
+        span {
+            display: flex;
+            justify-content: center;
+            align-self: center;
+            border-radius: $border-radius-tiny;
+            color: $color-medium;
+
+            &.upvote:not(.disabled):hover,
+            &.downvote:not(.disabled):hover {
+                background-color: $color-darker;
+                color: $color-vote;
+                cursor: pointer;
+            }
+
+            &.disabled {
+                color: $color-darkest;
+            }
+
+            &.voted {
+                color: $color-vote;
+            }
+
+            &.upvote {
+                align-self: end;
+                font-size: 14px;
+            }
+            &.downvote {
+                align-self: start;
+                font-size: 18px;
+            }
+        }
+    }
+
+    &.arrows.score {
+        grid-template-rows: 1fr 2em 1fr;
+    }
+
+    .score {
+        color: $color-medium;
+    }
+}

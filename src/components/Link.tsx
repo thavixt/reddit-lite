@@ -1,5 +1,5 @@
 import React from 'react';
-import LoadingAnimation from '../LoadingAnimation';
+import Loading from './Loading';
 
 interface Props {
     className: string;
@@ -26,7 +26,7 @@ export default function Link(props: Props) {
     }, [url]);
 
     if (isLoading) {
-        return <LoadingAnimation />;
+        return <Loading />;
     }
 
     if (!url) {

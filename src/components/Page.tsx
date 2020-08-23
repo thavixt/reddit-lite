@@ -1,14 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import unescape from 'unescape';
-
-import Awards from '../Awards';
-import CommentTree from '../CommentTree';
-import Flair from '../Flair';
-import Link from '../Link';
-import LoadingAnimation from '../LoadingAnimation';
-import Timestamp from '../Timestamp';
-import Votes from '../Votes';
+import Awards from './Awards';
+import CommentTree from './CommentTree';
+import Flair from './Flair';
+import Content from './Page/Content'
+import Timestamp from './Timestamp';
+import Votes from './Votes';
 
 const REDDIT_BASE_URL = 'https://reddit.com';
 
@@ -23,41 +21,29 @@ export default function Page(props: Props) {
     const dispatch = useDispatch();
     const ref = React.useRef<HTMLDivElement>(null);
     const currentPost = useSelector((state: State) => state.post);
-    const subReddit = useSelector((state: State) => state.subReddit);
 
     let post = currentPost;
 
-    React.useEffect(() => {
+    useEffect(() => {
         if (ref && ref.current) {
             ref.current.scrollTo(0, 0)
         }
     }, [post]);
 
+
     if (!post) {
         return null;
     }
 
-    if (typeof post === 'string') {
-        dispatch({
-            type: 'LOAD_POST',
-            payload: {
-                subReddit,
-                post,
-            },
-        });
-        return <LoadingAnimation />;
-    }
-
     let level = 0;
-    while (level < crossPostLevel) {
-        post = post.crosspost_parent_list[0];
+    while (level < crossPostLevel && post.crosspost_parent_list.length) {
+        post = post.crosspost_parent_list[0] ?? post;
         level++;
     }
 
-    const embed = post.media_embed ? post.media_embed.content : null;
-    const video = post.media && post.media.reddit_video
-        ? post.media.reddit_video.fallback_url
-        : null;
+    const embed = post.media_embed?.content;
+    const video = post.media?.reddit_video?.fallback_url;
+    const metadata = post.media_metadata?.[(Object.keys(post.media_metadata)[0])]?.s.u;
 
     const flairs = post.link_flair_richtext.map((e: Reddit.Flair, i: number) =>
         <Flair key={i} {...e} />
@@ -73,7 +59,7 @@ export default function Page(props: Props) {
                             className="bold link"
                             onClick={() => dispatch({
                                 type: 'SET_SUBREDDIT',
-                                payload: post.subreddit
+                                payload: (post as Reddit.Post).subreddit
                             })}>
                             r/{post.subreddit}
                         </span>
@@ -99,11 +85,12 @@ export default function Page(props: Props) {
                     <Awards awards={post.all_awardings} />
                 </div>
             </div>
-            {post.crosspost_parent_list
+            {crossPostLevel > 0
                 ? <Page className="crossPost" crossPostLevel={crossPostLevel + 1} />
                 : <Content
                     embed={embed}
                     video={video}
+                    metadata={metadata}
                     selftext={post.selftext_html}
                     url={post.url}
                 />
@@ -111,41 +98,6 @@ export default function Page(props: Props) {
             <Comments post={post} crossPostLevel={crossPostLevel} />
         </div >
     )
-}
-
-function Content({ embed, selftext, url, video }: {
-    embed: any;
-    video: string | null;
-    selftext: string;
-    url: string | null;
-}) {
-    const [ready, setReady] = useState(false);
-
-    useEffect(() => {
-        setReady(false);
-        setTimeout(() => setReady(true), 1);
-    }, [embed, selftext, url, video]);
-
-    if (!ready) {
-        return <LoadingAnimation />
-    }
-
-    return (
-        <div className="content">
-            {embed && <div
-                className="embed"
-                dangerouslySetInnerHTML={{ __html: unescape(embed) }}
-            />}
-            {video && <video controls className="video">
-                <source src={video} type="video/webm" />
-            </video>}
-            <div
-                className="html"
-                dangerouslySetInnerHTML={{ __html: unescape(selftext) }}
-            />
-            {!embed && !video && url && <Link className="url" url={url} />}
-        </div>
-    );
 }
 
 function Comments({ post, crossPostLevel }: { post: Reddit.Post, crossPostLevel: number }) {
@@ -169,3 +121,5 @@ function Comments({ post, crossPostLevel }: { post: Reddit.Post, crossPostLevel:
         </div>
     )
 }
+
+

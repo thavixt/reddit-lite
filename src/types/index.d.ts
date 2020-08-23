@@ -1,12 +1,13 @@
+declare module 'html-to-react';
 declare module 'unescape';
+
+type ActionType = 'SET_POST' | 'SET_SUBREDDIT' | 'SET_SORT' | 'SET_TIMEFRAME';
 
 type Sort = 'hot' | 'new' | 'controversial' | 'top' | 'rising';
 type TimeFrame = 'hour' | 'day' | 'week' | 'month' | 'year' | 'all';
 
-type ActionType = 'SET_POST' | 'SET_SUBREDDIT' | 'SET_SORT' | 'SET_TIMEFRAME' | 'LOAD_POST';
-
 interface Action {
-    type: string;
+    type: ActionType;
     payload?: any;
 }
 
@@ -15,7 +16,7 @@ interface APIError {
 }
 
 interface State {
-    post: null | Post;
+    post: null | Reddit.Post;
     sort: Sort;
     subReddit: string;
     timeFrame: TimeFrame;
@@ -72,8 +73,42 @@ namespace Reddit {
         crosspost_parent_list: Post[];
         id: string;
         link_flair_richtext: Flair[];
-        media: any;
-        media_embed: any;
+        media?: {
+            reddit_video?: {
+                fallback_url: string;
+            },
+            oembed?: {
+                description: string;
+                height: number;
+                html: string;
+                provider_name: string;
+                provider_url: string;
+                thumbnail_height: number;
+                thumbnail_url: string;
+                thumbnail_width: number;
+                title: string;
+                type: "rich";
+                url: string;
+                version: string;
+                width: number;
+            }
+        };
+        media_embed?: {
+            content: string;
+            height: number;
+            width: number;
+            scrolling: boolean;
+        };
+        media_metadata?: {
+            [key: string]: {
+                e: string;
+                id: string;
+                m: string;
+                p: { y: number; x: number; u: string }[];
+                s: { y: number; x: number; u: string };
+                status: string; // "valid"
+            }
+        }
         num_comments: number;
         permalink: string;
         score: number;
